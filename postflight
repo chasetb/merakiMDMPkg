@@ -1,0 +1,12 @@
+#!/bin/bash
+
+profile_tool='/usr/bin/profiles'
+profile_name='meraki_sm_mdm.mobileconfig'
+profile_identifier='com.meraki.sm.mdm'
+profile_check=$(profiles -P | grep $profile_identifier)
+
+if [ "${profile_check}" != "" ] ; then
+echo "Already Present, skipping install..."
+else
+    $profile_tool -v -I -F "${1}/Contents/Resources/${profile_name}"
+fi
